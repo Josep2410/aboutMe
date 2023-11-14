@@ -1,10 +1,12 @@
 import React from 'react'
-import {Outlet, Link} from 'react-router-dom'
+import {Outlet, Link, useLocation} from 'react-router-dom'
 
 export default function RootBG(){
+  let {pathname} = useLocation()
+  console.log(pathname)
 
   const navStrings = ['Home', 'Projects', 'Interests', 'Feedback', 'Contact']
-  const [state, setState] = React.useState(navStrings[0])
+  const [state, setState] = React.useState(pathname)
 
   function changeState(val){
     setState(val)
@@ -32,7 +34,9 @@ export default function RootBG(){
 
 function Badge({children, id, state, changeState}){
 
-  const match = id === state
+  const newId = `/${id}`
+
+  const match = newId === state
 
   const activeStyle = {
     backgroundColor : match? 'grey' : '', 
@@ -41,7 +45,7 @@ function Badge({children, id, state, changeState}){
   }
 
   return(
-    <div  id="badge" style={activeStyle} onClick={()=>changeState(id)}>
+    <div  id="badge" style={activeStyle} onClick={()=>changeState(newId)}>
       {children}
     </div>)
 }
