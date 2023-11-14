@@ -12,8 +12,8 @@ export default function RootBG(){
 
   const navLinks = navStrings.map(str =>{
     return(
-      <Link to={str} id="links">
-      <Badge key={str} id={str} state={state} changeState={changeState}>
+      <Link to={str} id="links" key={str}>
+        <Badge  id={str} state={state} changeState={changeState}>
             {str}
         </Badge>
       </Link>
